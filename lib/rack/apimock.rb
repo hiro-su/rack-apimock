@@ -35,11 +35,13 @@ module Rack
     private
 
     def get_template_path(env)
-      request_path = env['REQUEST_PATH'].downcase
+      request_path = env['REQUEST_PATH']
       request_path = "index" if request_path == "/"
       request_method = env['REQUEST_METHOD'].downcase
-      template = ::File.join @apidir, "#{request_path}_#{request_method}*"
-      content_type = env['CONTENT_TYPE'] || 'application/json'
+      template = ::File.join @apidir, "#{request_path.downcase}_#{request_method}*"
+      content_type = unless env['CONTENT_TYPE'].nil? || env['CONTENT_TYPE'].empty?
+                       env['CONTENT_TYPE']
+                     end || 'application/json'
       file_type = content_type.split('/').last
       return Dir.glob(template).select{|f| f =~ /#{file_type}/i }.first
     end
