@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "rack-apimock"
-  spec.version       = "0.0.0"
+  spec.version       = "0.0.1"
   spec.authors       = ["hiro-su"]
   spec.email         = ["h.sugipon@gmail.com"]
 
