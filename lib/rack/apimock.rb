@@ -19,10 +19,9 @@ module Rack
       unless env['QUERY_STRING'].empty?
         query_string = Rack::Utils.parse_nested_query(env['QUERY_STRING'])
 
-        case env["CONTENT_TYPE"].downcase
-        when "application/json"
+        case env["CONTENT_TYPE"]
+        when /application\/json/i
           require 'json'
-
           data = JSON.parse(response)
           response = query_string.each_with_object({}) {|(key, _), new_hash|
             new_hash.merge!(key => data[key])
@@ -40,8 +39,9 @@ module Rack
       request_path = "index" if request_path == "/"
       request_method = env['REQUEST_METHOD'].downcase
       template = ::File.join @apidir, "#{request_path}_#{request_method}*"
-      file_type = env['CONTENT_TYPE'].downcase.split('/').last
-      return Dir.glob(template).select{|f| f =~ /#{file_type}/ }.first
+      content_type = env['CONTENT_TYPE'] || 'application/json'
+      file_type = content_type.split('/').last
+      return Dir.glob(template).select{|f| f =~ /#{file_type}/i }.first
     end
   end
 end

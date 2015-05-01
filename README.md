@@ -11,10 +11,11 @@ $ rackup sample/config.ru
 ```
 
 ## Differentiating GET/POST/PUT/DELETE
-If you want to use advanced serving features like GET/POST/PUT/DELETE or templates in json, provide files like in the example below:
+If you want to use advanced serving features like GET/POST/PUT/DELETE or templates, provide files like in the example below:
 
 ```
-GET / => index_get.json
+GET / (Content-Type: application/json) => index_get.json
+GET / (Content-Type: application/xml) => index_get.xml
 GET /items/1 => items/1_get.json.erb
 POST /items/1 => items/1_post.json.erb
 ...
