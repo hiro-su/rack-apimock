@@ -25,7 +25,27 @@ POST /items/1 => items/1_post.json.erb
 
 ```
 <% @status = 200 %>
-<% @headers = { "Content-Type" => "application/json" }
+<% @headers = { "Content-Type" => "application/json" } %>
+```
+
+## Query String
+
+template file is items/sample_post.json.erb
+
+```
+<% @status = 201 %>
+<% @headers = { "Content-Type" => "application/json" } %>
+{
+  "method" : "post",
+  "status" : <%= @status %>
+}
+```
+
+request & response
+
+```
+$ curl -H 'Content-Type: application/json' -X POST http://localhost:9292/items/sample?method
+{"method":"post"}
 ```
 
 ## Contributing
