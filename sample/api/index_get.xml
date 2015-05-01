@@ -1,0 +1,15 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+<hcs:ListSiteRequest xmlns:hcs="http://www.cisco.hcs.com/HCSProvision.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<RequestHeader>
+<targetDomain>UnifiedCommunications</targetDomain>
+</RequestHeader>
+<GeographicSite>
+<!-- Customer -->
+<PlacePartyRoleAssoc>
+<placeRole>Customer</placeRole>
+<PartyRole xsi:type="hcs:Customer">
+<partyRoleId>Customer002</partyRoleId>
+</PartyRole>
+</PlacePartyRoleAssoc>
+</GeographicSite>
+</hcs:ListSiteRequest> 
