@@ -127,4 +127,15 @@ describe Rack::APIMock do
       expect(last_response.header['Content-Type']).to eq "application/json"
     end
   end
+
+  describe 'GET /items/sampleCamel with "Content-Type: application/json"' do
+    let(:app) { Rack::APIMock.new(test_app, apidir: apidir) }
+
+    it 'should return items/sampleCamel.json' do
+      get '/items/sample', {}, {"CONTENT_TYPE" => "application/json", "REQUEST_PATH" => "/items/sampleCamel"}
+
+      expect(last_response.status).to eq 200
+      expect(last_response.body).to eq ERB.new(File.open("#{apidir}/items/sampleCamel_get.json", &:read), nil, '<>').result
+    end
+  end
 end

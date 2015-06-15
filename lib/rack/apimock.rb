@@ -38,7 +38,7 @@ module Rack
       request_path = env['REQUEST_PATH']
       request_path = "index" if request_path == "/"
       request_method = env['REQUEST_METHOD'].downcase
-      template = ::File.join @apidir, "#{request_path.downcase}_#{request_method}*"
+      template = ::File.join @apidir, "#{request_path}_#{request_method}*"
       content_type = unless env['CONTENT_TYPE'].nil? || env['CONTENT_TYPE'].empty?
                        env['CONTENT_TYPE']
                      end || 'application/json'
