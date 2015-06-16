@@ -1,7 +1,12 @@
 <% @status = 201 %>
 <% @headers = {"Content-Type" => "application/json"} %>
-<% require 'json' %>
+<% unless @request_body && @request_body['test'] %>
 {
-  "method" : "get",
+  "method" : "post",
   "headers" : <%= @headers.to_json %>
 }
+<% else %>
+{
+  "test": <%= @request_body['test'] %>
+}
+<% end %>

@@ -138,4 +138,15 @@ describe Rack::APIMock do
       expect(last_response.body).to eq ERB.new(File.open("#{apidir}/items/sampleCamel_get.json", &:read), nil, '<>').result
     end
   end
+
+  describe 'POST /items/sample with request json body' do
+    let(:app) { Rack::APIMock.new(test_app, apidir: apidir) }
+
+    it 'should return switch response body' do
+      data = { 'test' => 123 }
+      post '/items/sample', data.to_json, {"CONTENT_TYPE" => "application/json", "REQUEST_PATH" => "/items/sample"}
+      expect(last_response.status).to eq 201
+      expect(JSON.parse(last_response.body)).to eq data
+    end
+  end
 end
