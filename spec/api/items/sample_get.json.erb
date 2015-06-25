@@ -1,6 +1,5 @@
 <% @status = 200 %>
 <% @headers = {"Content-Type" => "application/json"} %>
-<% require 'json' %>
 {
   "method" : "get",
   "headers" : <%= @headers.to_json %>
