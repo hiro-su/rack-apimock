@@ -9,6 +9,10 @@ module Rack
     end
 
     def call(env)
+      dup._call(env)
+    end
+
+    def _call(env)
       @status, @headers = 200, {}
       if env["CONTENT_TYPE"] =~ /application\/json/i
         @request_body = JSON.parse(env["rack.input"].gets) rescue nil
