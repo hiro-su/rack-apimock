@@ -29,6 +29,17 @@ describe Rack::APIMock do
     end
   end
 
+  describe 'GET /index with "Content-Type: application/json;charset=UTF-8"' do
+    let(:app) { Rack::APIMock.new(test_app, apidir: apidir) }
+
+    it 'should return index_get.json' do
+      get '/index', {}, {"CONTENT_TYPE" => "application/json;charset=UTF-8", "REQUEST_PATH" => "/"}
+
+      expect(last_response.status).to eq 200
+      expect(last_response.body).to eq File.open("#{apidir}/index_get.json", &:read)
+    end
+  end
+
   describe 'POST / with "Content-Type: application/json"' do
     let(:app) { Rack::APIMock.new(test_app, apidir: apidir) }
 
