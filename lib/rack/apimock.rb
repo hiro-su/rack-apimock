@@ -49,7 +49,7 @@ module Rack
       content_type = unless env['CONTENT_TYPE'].nil? || env['CONTENT_TYPE'].empty?
                        env['CONTENT_TYPE']
                      end || 'application/json'
-      file_type = content_type.split('/').last
+      file_type = content_type.split(';').first.split('/').last
       return Dir.glob(template).select{|f| f =~ /#{file_type}/i }.first
     end
   end
